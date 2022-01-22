@@ -1,30 +1,34 @@
 <?php
 
-function is_twins(string $original ,string $toCompare){
+function is_twins(string $original ,string $toCompare): bool{
+    if (empty($original !== '' || empty($toCompare)))
+    {
+        return false;
+    }
     if ( strlen($original) != strlen($toCompare))
     {
-        echo 'The two string has not same length';
+        return false;
     }
 
-    $originalArray = count_chars($original, 1);
-    $toCompareArray = count_chars($toCompare, 1);
+    $originalArray = count_chars(strtolower($original), 1);
+    $toCompareArray = count_chars(strtolower($toCompare), 1);
 
     if (count($originalArray) != count($toCompareArray)) {
-        echo 'Character grouped is not same length';
+        return false;
     }
 
     if (count($originalArray) == count($toCompareArray)) {
 //        $sortedOriginKey = ksort($originalArray);
 //        $sortedCompareKey = ksort($toCompareArray);
         if ($originalArray === $toCompareArray) {
-            var_dump($originalArray);
-            var_dump($toCompareArray);
-            echo 'twins';
+            return true;
         } else {
-            echo 'not twins but contains same number of characters and same number of grouped caracters';
+            return false;
         }
     }
+    return false;
 
 }
 
-is_twins('nonaaann', 'aaaonnnn');
+$value = is_twins('Onnaaann', 'Aaaonnnn');
+var_dump($value);
